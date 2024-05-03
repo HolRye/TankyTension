@@ -227,18 +227,18 @@ function drawGame() {
 // Handle the main gameplay logic, including movement and firing
 function handleGameplay() {
   // Move the current tank 
-  if (keyState[DOWN_ARROW]) { 
+  if (keyState[65]) { 
     currentTank.x = max(0, currentTank.x - tankMovementSpeed); // Move left, stay within bounds
   }
-  if (keyState[UP_ARROW]) { 
+  if (keyState[68]) { 
     currentTank.x = min(width - currentTank.width, currentTank.x + tankMovementSpeed); // Move right, stay within bounds
   }
 
   // Adjust firing angle with arrow keys
-  if (keyState[LEFT_ARROW]) {
+  if (keyState[81]) {
     angle += PI / 180; // Increase angle
   }
-  if (keyState[RIGHT_ARROW]) {
+  if (keyState[69]) {
     angle -= PI / 180; // Decrease angle
   }
 
