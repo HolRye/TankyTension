@@ -33,31 +33,32 @@ TANKY TENSION PROJECT DOCUMENTATION:
    they are needed for specific events / scenes. Generally, this project has a pretty simple and straightforward flow of data, and along with this the all of the funtional code in both the project and sound files are well commented to allow for easy reading and discersion
    of "what-does-what" inside of the code itself.
 -  The main portions of the project that I had to implement are as follows:
-     Creation of the welcome screen
-     creation of the gameplay scene
-     creation of the game over scene
-     creation of the tank, projectile, explosion, ground, timer, and button objects
-     Creation of all artistic pieces of this project, such as the background and the title logo for the game 
-     animation for the explosions
-     physics for the projectile component
-     logic for all of the above components to make the game functional
-     interaction from the user, such as the movement, firing of the projectile, and angling of the barrel
-     interaction with the buttons to do their required components
-     game flow logic that takes care of the condiitons of the scenes, such as the which player wins, which players turn it is, etc. Also the implementation of switiching between scenes whenever required conditions / user inputs are given in the canvas
-     creation of the soundtrack, sound effects, and themes for the game
-     importing of these soundtracks to the main game (this took me SOOOOOOOO long to get working with p5 and Tone.js)
-     implementation of these imported functions in the sketch to have the functions called whenever their respective events occur.
-     creation of the .ino file to handle the physical components of the project on the  breadboard
-     connection of the .ino file with the p5 project
-     implementation in the p5 project to receive the physical arduino inputs
-     implementation in the p5 project to send signals to the arduino outputs
-     cleaning up the code and adding comments to ensure readability for others
-     working build is complete :)
+    - Creation of the welcome screen
+    - creation of the gameplay scene
+    - creation of the game over scene
+    - creation of the tank, projectile, explosion, ground, timer, and button objects
+    - Creation of all artistic pieces of this project, such as the background and the title logo for the game 
+    - animation for the explosions
+    - physics for the projectile component
+    - logic for all of the above components to make the game functional
+    - interaction from the user, such as the movement, firing of the projectile, and angling of the barrel
+    - interaction with the buttons to do their required components
+    - game flow logic that takes care of the condiitons of the scenes, such as the which player wins, which players turn it is, etc. Also the implementation of switiching between scenes whenever required conditions / user inputs are given in the canvas
+    - creation of the soundtrack, sound effects, and themes for the game
+    - importing of these soundtracks to the main game (this took me SOOOOOOOO long to get working with p5 and Tone.js)
+    - implementation of these imported functions in the sketch to have the functions called whenever their respective events occur.
+    - creation of the .ino file to handle the physical components of the project on the  breadboard
+    - connection of the .ino file with the p5 project
+    - implementation in the p5 project to receive the physical arduino inputs
+    - implementation in the p5 project to send signals to the arduino outputs
+    - cleaning up the code and adding comments to ensure readability for others
+    - working build is complete :)
 
 //Link to video of this project working as intended
 -  
 
 //images of the different scenes of the game with notes to say what each respective one is: 
+- 
 
 //Future development:
 -  in the future, I am planning on updating this game on my own for my own personal enjoyment. There are a few major things I would like to add to this game, with the main features being:
