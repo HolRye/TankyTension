@@ -1,3 +1,7 @@
+//sound variables
+window.themeTunePlayed = false; 
+
+
 // Explosion variables
 let explosionTimer = 0;
 const maxCircles = 30;
@@ -13,6 +17,11 @@ let projectile;
 let backgroundImage;
 let circles = [];
 let gameStarted = false; // Indicates if the game has started (welcome screen)
+gameOver = false; // Game not over
+let welcomeThemePlayed = false;
+
+
+
 
 // Load background image in preload
 function preload() {
@@ -23,12 +32,13 @@ function preload() {
 function setup() {
   createCanvas(800, 400);
   initializeGameVariables(); // Reset game variables
-
   setInterval(() => {
     if (gameStarted && !gameOver) {
       timer--;
       if (timer <= 0) {
         gameOver = true; // Game ends when timer reaches zero
+        window.stopTheme();
+        window.victorySound();
       }
     }
   }, 1000); // Timer decreases every second
@@ -40,11 +50,26 @@ function draw() {
   if (!gameStarted) {
     drawWelcomeScreen(); // Draw the welcome screen
   } else {
+    // If the game has just started, play the theme tune
+    if (!window.themeTunePlayed) {
+      
+      window.playThemeTune();
+      window.themeTunePlayed = true;
+    }
     drawGame(); // Draw the game scene
   }
 }
 
+
+function startGame() {
+  gameStarted = true; // Set game started flag
+}
+
 function drawWelcomeScreen() {
+  if (!welcomeThemePlayed) {
+    window.welcomeTheme();
+    welcomeThemePlayed = true; // Set the flag to true after playing
+  }
   // Create a gradient background from dark gray to light gray
   const gradientSteps = 50; // Number of gradient steps
   const bottomColor = color(50); // Dark gray
@@ -79,7 +104,9 @@ function drawWelcomeScreen() {
       mouseX < width / 2 + 100 &&
       mouseY > height / 2 && 
       mouseY < height / 2 + 50) {
-    startGame(); // Start the game
+        window.stopWelcomeTheme();
+        window.buttonNoise();
+      startGame(); // Start the game
   }
 
   // Ensure there are always three active explosions
@@ -144,9 +171,6 @@ function drawWelcomeScreen() {
 
 
 // Function to start the game (transition from welcome screen to gameplay)
-function startGame() {
-  gameStarted = true; // Set game started flag
-}
 
 function drawGround() {
   // Ground parameters
@@ -270,9 +294,13 @@ function handleGameplay() {
       if (tank1.health <= 0) {
         winner = 2; // Player 2 wins
         gameOver = true;
+        window.stopTheme();
+        window.victorySound();
       } else if (tank2.health <= 0) {
         winner = 1; // Player 1 wins
         gameOver = true;
+        window.stopTheme();
+        window.victorySound();
       }
 
       switchControl(); // Switch control after collision
@@ -382,8 +410,10 @@ function handleGameOver() {
       mouseX < width / 2 + 50 &&
       mouseY > height / 2 + 30 &&
       mouseY < height / 2 + 70) {
+        window.buttonNoise();
     resetGame(); // Reset game variables
     activeExplosions = []; // Clear active explosions
+    window.playThemeTune();
   }
 }
 
@@ -442,7 +472,7 @@ function drawTank(tank) {
 // Key press and release handlers
 function keyPressed() {
   if (!gameOver) {
-    keyState[keyCode] = true;
+    keyState[keyCode] = true; // Mark key as pressed in state
 
     if (key === ' ') { // Fire projectile
       if (!projectileFired) {
@@ -453,14 +483,18 @@ function keyPressed() {
           vy: speed * sin(-angle),
         };
         projectileFired = true;
+
+        window.fireSound(); // Play the fire sound when firing
       }
     }
   }
 }
 
+// Key release handler
 function keyReleased() {
-  keyState[keyCode] = false; // Reset key state
+  keyState[keyCode] = false; // Mark key as released in state
 }
+
 
 // Switch control between tanks after firing
 function switchControl() {
@@ -484,6 +518,8 @@ function triggerExplosion(x, y) {
   explosionCenter = createVector(x, y); // Set explosion center
   explosionTimer = 0; // Reset explosion timer
   circles = []; // Clear previous explosion circles
+
+  window.explosionSound();
 }
 
 // Function to add a circle to the explosion
