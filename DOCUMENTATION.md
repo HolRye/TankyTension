@@ -62,12 +62,12 @@ TANKY TENSION PROJECT DOCUMENTATION:
 
 //Future development:
 -  in the future, I am planning on updating this game on my own for my own personal enjoyment. There are a few major things I would like to add to this game, with the main features being:
-   1 Multiple weapons for tanks to use to allow for different gameplay loops
-     2 ability for tanks to place down different shapes on the canvas that will act as terrain that the projectiles can interact with (similar to the game Worms)
-       3 a larger gameplay canvas and randomly generated terrain shapes and properties (such as having increased gravity, less traction, or difficult to navigate terrain)
-        4 giving the tank objects themselves physics so they can interact with the new terrain more, fall apart piece by piece whenever they are destroyed, and get knocked around by the explosions near/on them
-          5 creating more detailed and clean looking graphics for the project to make it more visually appealing
-            6 having the music for the game be affected by different events in the game, such as the track becoming more intnese as tanks get lower hp / the timer passes a certian threshold
+   -1 Multiple weapons for tanks to use to allow for different gameplay loops
+     -2 ability for tanks to place down different shapes on the canvas that will act as terrain that the projectiles can interact with (similar to the game Worms)
+       -3 a larger gameplay canvas and randomly generated terrain shapes and properties (such as having increased gravity, less traction, or difficult to navigate terrain)
+         -4 giving the tank objects themselves physics so they can interact with the new terrain more, fall apart piece by piece whenever they are destroyed, and get knocked around by the explosions near/on them
+           -5 creating more detailed and clean looking graphics for the project to make it more visually appealing
+             -6 having the music for the game be affected by different events in the game, such as the track becoming more intnese as tanks get lower hp / the timer passes a certian threshold
 
 
 //THANK YOU FOR READING ABOUT MY GAME, FOR FURTHER QUESTIONS ABOUT THE GAME EMAIL AT SMALO15@LSU.EDU//
