@@ -17,11 +17,13 @@ let projectile;
 let backgroundImage;
 let circles = [];
 let gameStarted = false; // Indicates if the game has started (welcome screen)
-gameOver = false; // Game not over
+let gameOver = false; // Game not over
 let welcomeThemePlayed = false;
 
-
-
+// Arduino variables
+let port;
+let connectButton;
+let serialInput = "";
 
 // Load background image in preload
 function preload() {
@@ -30,7 +32,10 @@ function preload() {
 }
 
 function setup() {
+  port = createSerial();
   createCanvas(800, 400);
+  connectButton = createButton("Connect");
+  connectButton.mousePressed(connect);
   initializeGameVariables(); // Reset game variables
   setInterval(() => {
     if (gameStarted && !gameOver) {
@@ -47,6 +52,7 @@ function setup() {
 
 // Draw function to manage the welcome screen and gameplay
 function draw() {
+  let serialInput = port.readUntil('\n');
   if (!gameStarted) {
     drawWelcomeScreen(); // Draw the welcome screen
   } else {
@@ -56,9 +62,38 @@ function draw() {
       window.playThemeTune();
       window.themeTunePlayed = true;
     }
+    handleFiring(serialInput);
     drawGame(); // Draw the game scene
   }
 }
+
+function connect() {
+  if (!port.opened()) {
+    port.open('Arduino', 9600);
+  } else {
+    port.close();
+  }
+}
+
+// Function to handle firing based on serial input
+function handleFiring(serialInput) {
+  if (serialInput && serialInput.trim() === "1") {
+    if (!projectileFired) {
+      // Fire projectile for the current tank
+      projectile = {
+        x: currentTank.x + currentTank.width / 2,
+        y: currentTank.y - currentTank.height,
+        vx: speed * cos(-angle),
+        vy: speed * sin(-angle),
+      };
+      projectileFired = true;
+
+      // Play firing sound
+      window.fireSound();
+    }
+  }
+}
+
 
 
 function startGame() {
@@ -227,18 +262,18 @@ function drawGame() {
 // Handle the main gameplay logic, including movement and firing
 function handleGameplay() {
   // Move the current tank 
-  if (keyState[DOWN_ARROW]) { 
+  if (keyState[65]) { 
     currentTank.x = max(0, currentTank.x - tankMovementSpeed); // Move left, stay within bounds
   }
-  if (keyState[UP_ARROW]) { 
+  if (keyState[68]) { 
     currentTank.x = min(width - currentTank.width, currentTank.x + tankMovementSpeed); // Move right, stay within bounds
   }
 
-  // Adjust firing angle with arrow keys
-  if (keyState[LEFT_ARROW]) {
+  // Adjust firing angle using Q and E keys
+  if (keyState[81]) {
     angle += PI / 180; // Increase angle
   }
-  if (keyState[RIGHT_ARROW]) {
+  if (keyState[69]) {
     angle -= PI / 180; // Decrease angle
   }
 
@@ -251,6 +286,9 @@ function handleGameplay() {
   fill(255); // White text color
   text("Player 1 HP: " + tank1.health, 200, 30); // Player 1's health
   text("Player 2 HP: " + tank2.health, 600, 30); // Player 2's health
+  if (!gameOver) {
+    sendDataToArduino(tank1.health, tank2.health);
+  }
 
   // Draw the trajectory line for the current tank
   push();
@@ -340,6 +378,13 @@ function handleGameOver() {
   } else {
     text("Times Up! It's A Tie!", width / 2, height / 2); // Display a tie message
   }
+
+  if (gameOver) {
+    tank1.health;
+    tank2.health;
+    sendDataToArduino(tank1.health, tank2.health);
+  }
+  
 
   // Add random explosions during game over
   const explosionFrequency = 10; // Frequency of explosions (lower value = more frequent)
@@ -562,6 +607,13 @@ class Circle {
   }
 }
 
+function sendDataToArduino(tank1HP, tank2HP) {
+  // Send tank HP values to Arduino via serial
+  let tankData = tank1HP.toString() + ' ' + tank2HP.toString() + '\n';
+  port.write(tankData);
+}
+
+
 function initializeGameVariables() {
   angle = PI / 2; // Default firing angle
   speed = 8; // Projectile speed
@@ -583,6 +635,12 @@ function initializeGameVariables() {
     color: 'red',
     health: 3,
   };
+
+  if (gameOver) {
+    tank1.health = 3;
+    tank2.health = 3;
+    sendDataToArduino(tank1.health, tank2.health);
+  }
 
   currentTank = tank1; // Start with tank1
   projectileFired = false; // No projectile fired initially
