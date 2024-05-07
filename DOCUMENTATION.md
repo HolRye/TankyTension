@@ -79,6 +79,11 @@ TANKY TENSION PROJECT DOCUMENTATION:
          - giving the tank objects themselves physics so they can interact with the new terrain more, fall apart piece by piece whenever they are destroyed, and get knocked around by the explosions near/on them
            - creating more detailed and clean looking graphics for the project to make it more visually appealing
              - having the music for the game be affected by different events in the game, such as the track becoming more intnese as tanks get lower hp / the timer passes a certian threshold
+            
+
+Known probelms that occured at presenation time:
+- on some machines, the distortion mixed with the bass of the main soundtrack can sometimes cause some audio tearing if too many occur at once. this only happened during the presentation while I was on the class computer
+- When using extension cables for the arduino, it caused there to be extreme lag with the input of the fire button registering inside of the canvas. this issue could be alleviaed by adjusting serial reading logic, or perhaps refraining from using cable extendors for the arduino.
 
 
 //THANK YOU FOR READING ABOUT MY GAME, FOR FURTHER QUESTIONS ABOUT THE GAME EMAIL AT SMALO15@LSU.EDU//
