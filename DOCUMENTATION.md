@@ -55,10 +55,21 @@ TANKY TENSION PROJECT DOCUMENTATION:
     - working build is complete :)
 
 //Link to video of this project working as intended
--  
+-  https://youtu.be/93UZ515nu2Y
 
 //images of the different scenes of the game with notes to say what each respective one is: 
-- 
+- Below is the welcome screen of the game. you press the start button to actually begin the game
+- ![welcomeScreen](https://github.com/HolRye/TankyTension/assets/47402675/dff82d33-9553-45ec-b999-21d4d7f42ce0)
+- Below is what appears upon starting the game. each tank starts off with 3 hp, the timer begins countdown from 60 seconds, and each tank begins on oppostie sides of the canvas from one another
+- ![gameStart](https://github.com/HolRye/TankyTension/assets/47402675/82671a5f-d81e-4a88-9cd3-8a0bc767319f)
+- Below is an image of gameplay occuring. the projectile fired from tank 1 missed, and exploded right next to tank 2
+- ![gamePlay](https://github.com/HolRye/TankyTension/assets/47402675/faa23c89-64dd-4cd0-bcbc-7ec8d5b5e7b0)
+- Below is one of 3 ending screens you can have (player 1 wins, player 2 wins, or time runs out).
+- ![gameEnd](https://github.com/HolRye/TankyTension/assets/47402675/9aecdd64-c55f-4f4c-9a7d-d496a6c53de1)
+
+
+
+
 
 //Future development:
 -  in the future, I am planning on updating this game on my own for my own personal enjoyment. There are a few major things I would like to add to this game, with the main features being:
